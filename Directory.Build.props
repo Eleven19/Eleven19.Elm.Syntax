@@ -1,0 +1,16 @@
+<Project>
+    <PropertyGroup>
+        <PackageTags>f#, fsharp</PackageTags>
+        <PackageProjectUrl>https://github.com/Eleven19/Eleven19.Elm.Syntax</PackageProjectUrl>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile> <!--https://docs.microsoft.com/en-gb/nuget/reference/msbuild-targets#packagereadmefile -->
+        <RepositoryType>git</RepositoryType>
+        <Authors>Eleven19</Authors>
+        <RepositoryUrl>https://github.com/Eleven19/Eleven19.Elm.Syntax</RepositoryUrl>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="/"/>    
+        <None Include="$(MSBuildThisFileDirectory)LICENSE.md" Pack="true" PackagePath="/"/>    
+    </ItemGroup>
+</Project>
