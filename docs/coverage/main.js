@@ -221,7 +221,11 @@ var assemblies = [
   {
     "name": "Eleven19.Elm.Syntax",
     "classes": [
-      { "name": "Eleven19.Elm.Syntax.Say", "rp": "Eleven19.Elm.Syntax_Say.html", "cl": 9, "ucl": 0, "cal": 9, "tl": 56, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "<StartupCode$Eleven19-Elm-Syntax>.$Elm.Syntax.Range", "rp": "Eleven19.Elm.Syntax_Range.html", "cl": 1, "ucl": 0, "cal": 1, "tl": 91, "cb": 0, "tb": 0, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "Eleven19.Elm.Prelude", "rp": "Eleven19.Elm.Syntax_Prelude.html", "cl": 5, "ucl": 4, "cal": 9, "tl": 29, "cb": 4, "tb": 8, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "Eleven19.Elm.Syntax.Location", "rp": "Eleven19.Elm.Syntax_Location.html", "cl": 6, "ucl": 0, "cal": 6, "tl": 91, "cb": 4, "tb": 4, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "Eleven19.Elm.Syntax.Range", "rp": "Eleven19.Elm.Syntax_Range.2.html", "cl": 16, "ucl": 9, "cal": 25, "tl": 91, "cb": 1, "tb": 2, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
+      { "name": "Eleven19.Elm.Syntax.RangeModule", "rp": "Eleven19.Elm.Syntax_RangeModule.html", "cl": 0, "ucl": 11, "cal": 11, "tl": 91, "cb": 0, "tb": 10, "cm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "hc": [], "metrics": { } },
     ]},
 ];
 
@@ -230,9 +234,19 @@ var metrics = [{ "name": "Cyclomatic complexity", "abbreviation": "cc", "explana
 var historicCoverageExecutionTimes = [];
 
 var riskHotspotMetrics = [
+      { "name": "Cyclomatic complexity", "explanationUrl": "https://en.wikipedia.org/wiki/Cyclomatic_complexity" },
+      { "name": "NPath complexity", "explanationUrl": "https://modess.io/npath-complexity-cyclomatic-complexity-explained" },
+      { "name": "Crap Score", "explanationUrl": "https://googletesting.blogspot.de/2011/02/this-code-is-crap.html" },
 ];
 
 var riskHotspots = [
+  {
+    "assembly": "Eleven19.Elm.Syntax", "class": "Eleven19.Elm.Syntax.RangeModule", "reportPath": "Eleven19.Elm.Syntax_RangeModule.html", "methodName": "Microsoft.FSharp.Core.FSharpResult`2<Eleven19.Elm.Syntax.Range,System.String> Eleven19.Elm.Syntax.RangeModule::fromList(Microsoft.FSharp.Collections.FSharpList`1<System.String>)", "methodShortName": "fromList(...)", "fileIndex": 0, "line": 85,
+    "metrics": [
+      { "value": 6, "exceeded": false },
+      { "value": 10, "exceeded": false },
+      { "value": 42, "exceeded": true },
+    ]},
 ];
 
 var branchCoverageAvailable = true;

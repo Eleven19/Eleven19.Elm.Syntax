@@ -1,6 +1,11 @@
 namespace Eleven19.Elm.Syntax
 
 open Eleven19.Elm
+#if FABLE_COMPILER
+open Thoth.Json
+#else
+open Thoth.Json.Net
+#endif
 
 /// Source location
 type Location = {
@@ -51,14 +56,30 @@ type Range = {
         |> Option.defaultValue Range.Empty
 
 
+type Range with
+
+    member self.Encode =
+        [
+            self.Start.Row
+            self.Start.Column
+            self.End.Row
+            self.End.Column
+        ]
+        |> List.map Encode.int
+        |> Encode.list
+
 module Range =
     let emptyRange: Range = Range.Empty
+
+    let encode (range: Range) = range.Encode
 
     let inline combine (ranges: #seq<Range>) = Range.Combine ranges
 
     let inline compare left right = Range.Compare(left, right)
 
     let inline compareLocations left right = Location.Compare(left, right)
+
+    let inline sortLocations locations = Location.Sort locations
 
     let fromList (input: string list) =
         match input with
