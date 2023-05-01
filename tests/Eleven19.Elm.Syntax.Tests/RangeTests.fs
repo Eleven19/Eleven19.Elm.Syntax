@@ -5,6 +5,8 @@ open Eleven19.Elm
 open Expecto
 open Eleven19.Elm.Syntax
 open Eleven19.Elm.Syntax.Range
+open FsCheck
+open Thoth.Json.Net
 
 module RangeTests =
     let combineTests = [
@@ -190,6 +192,73 @@ module RangeTests =
         ]
     ]
 
+    let encodeTests = [
+        test "given an empty range encodes to a zeroed out JSON list" {
+            let actual =
+                Range.emptyRange
+                |> Range.encode
+
+            let expected =
+                Encode.list [
+                    Encode.int 0
+                    Encode.int 0
+                    Encode.int 0
+                    Encode.int 0
+                ]
+                |> Encode.toString 0
+
+            Encode.toString 0 actual
+            |> Expect.equal expected
+        }
+
+        test
+            "given a range encodes to a 4 element list of start row, start column, end row, end column" {
+            let range = {
+                Start = { Row = 1; Column = 2 }
+                End = { Row = 3; Column = 4 }
+            }
+
+            Range.encode range
+            |> Encode.toString 0
+            |> Expect.equal
+            <| Encode.toString
+                0
+                (Encode.list [
+                    Encode.int 1
+                    Encode.int 2
+                    Encode.int 3
+                    Encode.int 4
+                ])
+        }
+    ]
+
+    let decoderTests = [
+        test "given a JSON array of 4 ints returns a Range" {
+            let json = "[1,80,5,120]"
+
+            let expected = {
+                Start = { Row = 1; Column = 80 }
+                End = { Row = 5; Column = 120 }
+            }
+
+            json
+            |> Decode.fromString Range.decoder
+            |> Expect.equal (Result.Ok expected)
+        }
+
+        test "given an empty JSON array then the decoder returns an Error" {
+            let json = "[]"
+            let expected = Result.Error "Invalid input list"
+
+            let actual =
+                json
+                |> Decode.fromString Range.decoder
+
+            Expect.isError actual "Expected an Error"
+
+        }
+    ]
+
 
     [<Tests>]
     let tests =
@@ -197,4 +266,6 @@ module RangeTests =
             describe "combine" combineTests
             describe "compare" compareTests
             describe "compareLocations" compareLocationsTests
+            describe "encode" encodeTests
+            describe "decoder" decoderTests
         ]

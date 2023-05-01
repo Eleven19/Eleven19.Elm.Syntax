@@ -4,6 +4,7 @@ open Eleven19.Elm
 #if FABLE_COMPILER
 open Thoth.Json
 #else
+open Microsoft.FSharp.Core
 open Thoth.Json.Net
 #endif
 
@@ -56,22 +57,8 @@ type Range = {
         |> Option.defaultValue Range.Empty
 
 
-type Range with
-
-    member self.Encode =
-        [
-            self.Start.Row
-            self.Start.Column
-            self.End.Row
-            self.End.Column
-        ]
-        |> List.map Encode.int
-        |> Encode.list
-
 module Range =
     let emptyRange: Range = Range.Empty
-
-    let encode (range: Range) = range.Encode
 
     let inline combine (ranges: #seq<Range>) = Range.Combine ranges
 
@@ -81,11 +68,39 @@ module Range =
 
     let inline sortLocations locations = Location.Sort locations
 
-    let fromList (input: string list) =
+    let private fromList (input: int list) =
         match input with
         | [ a; b; c; d ] ->
             Result.Ok {
-                Range.Start = { Row = int a; Column = int b }
-                End = { Row = int c; Column = int d }
+                Range.Start = { Row = a; Column = b }
+                End = { Row = c; Column = d }
             }
         | _ -> Result.Error "Invalid input list"
+
+    let private fromResult =
+        function
+        | Result.Ok successValue -> Decode.succeed successValue
+        | Result.Error errorMessage -> Decode.fail errorMessage
+
+    let encode (range: Range) =
+        [
+            range.Start.Row
+            range.Start.Column
+            range.End.Row
+            range.End.Column
+        ]
+        |> List.map Encode.int
+        |> Encode.list
+
+    let decoder: Decoder<Range> =
+        Decode.list Decode.int
+        |> Decode.andThen (
+            fromList
+            >> fromResult
+        )
+
+type Range with
+
+    static member Decoder = Range.decoder
+    static member Encode(range) = Range.encode range
+    member self.Encode() = Range.encode self
