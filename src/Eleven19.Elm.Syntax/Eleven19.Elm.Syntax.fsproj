@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-  </PropertyGroup>
-  <PropertyGroup>
-    <Title>Eleven19.Elm.Syntax</Title>
-    <Description>Eleven19.Elm.Syntax does the thing!</Description>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageTags>$(PackageTags),fable,fable-javascript</PackageTags>
+    </PropertyGroup>
+    <PropertyGroup>
+        <Title>Eleven19.Elm.Syntax</Title>
+        <Description>Eleven19.Elm.Syntax does the thing!</Description>
 
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='Release'">
-    <Optimize>true</Optimize>
-    <Tailcalls>true</Tailcalls>
-    
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="Library.fs" />
-  </ItemGroup>
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)'=='Release'">
+        <Optimize>true</Optimize>
+        <Tailcalls>true</Tailcalls>
+
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="AssemblyInfo.fs" />
+        <Compile Include="Elm.Prelude.fs" />
+        <Compile Include="Elm.Syntax.Range.fs" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="FSharp.Core" />
+        <PackageReference Include="Thoth.Json" />
+        <PackageReference Include="Thoth.Json.Net" />
+    </ItemGroup>
+    <!-- Add source files to "fable" folder in Nuget package -->
+    <ItemGroup>
+        <Content Include="*.fsproj; **\*.fs; **\*.fsi" PackagePath="fable\" />
+    </ItemGroup>
 </Project>
- 

@@ -1,0 +1,8 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "fable": "dotnet fable src/Eleven19.Elm.Syntax -o src/Eleven19.Elm.Syntax-ts --fableLib fable-library --noReflection",
+        "build": "npm run fable"
+    }
+}
