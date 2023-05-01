@@ -6,7 +6,7 @@
         <GenerateProgramFile>false</GenerateProgramFile>
     </PropertyGroup>
     <ItemGroup>
-        <ProjectReference Include="../../src/Eleven19.Elm.Syntax/Eleven19.Elm.Syntax.fsproj"/>
+        <ProjectReference Include="../../src/Eleven19.Elm.Syntax/Eleven19.Elm.Syntax.fsproj" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Codinators.XunitHelpers" />
@@ -28,9 +28,10 @@
         <PackageReference Include="Verify.Expecto" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="AssemblyInfo.fs"/>
-        <Compile Include="Tests.fs"/>
-        <Compile Include="Main.fs"/>
+        <Compile Include="../Shared/Testing.fs" />
+        <Compile Include="AssemblyInfo.fs" />
+        <Compile Include="RangeTests.fs" />
+        <Compile Include="Main.fs" />
     </ItemGroup>
 </Project>
 
